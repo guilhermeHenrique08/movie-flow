@@ -1,0 +1,84 @@
+import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
+
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+
+import Loading from "../layout/Loading";
+
+function Details() {
+  const [movie, setMovie] = useState({});
+  const { id } = useParams();
+
+  async function ApiMovie(url) {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    console.log(data);
+    setMovie(data);
+  }
+
+  useEffect(() => {
+    const url_key = `https://api.themoviedb.org/3/movie/${id}?api_key=0c9e0791b3d75d434122c718a5f88d13`;
+
+    ApiMovie(url_key);
+  }, []);
+
+  return (
+    <div className="lg:h-screen lg:flex lg:justify-center">
+      <div className="mx-auto flex flex-col justify-center pt-28 p-10 max-w-3xl lg:max-w-7xl lg:flex-row lg:gap-6 lg:items-center lg:justify-center lg:h-screen">
+        {movie.id ? (
+          <>
+            <div className="flex flex-col items-center w-full lg:w-2/5">
+              <img
+                src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
+                alt={movie.title}
+                className="rounded w-full"
+              />
+              <a
+                href={movie.homepage}
+                target="_blank"
+                className="btn my-3 w-full"
+              >
+                Acessar pagina
+              </a>
+              <div className="flex gap-8 my-5">
+                <FaGithub className="text-xl" />
+                <FaLinkedin className="text-xl" />
+                <FaInstagram className="text-xl" />
+              </div>
+            </div>
+            <div className="w-full flex flex-col justify-center gap-5 border-white pb-5 lg:w-3/5 lg:border-b-2">
+              <h2 className="font-bold text-lg lg:text-3xl">{movie.title}</h2>
+              <div className="my-5">
+                <h3 className="font-semibold lg:text-lg">Resumo</h3>
+                <p className="text-lg lg:text-base">{movie.overview}</p>
+              </div>
+              <div>
+                <p className="text-gray-500 font-lg">
+                  Nota: <span className="text-black">{movie.vote_average}</span>
+                </p>
+                <p className="text-gray-500 font-lg">
+                  Data: <span className="text-black">{movie.release_date}</span>
+                </p>
+                <p className="text-gray-500 font-lg">
+                  Generos:{" "}
+                  <span className="text-black">
+                    {movie.genres.map((gender) => gender.name).join(", ")}
+                  </span>
+                </p>
+                <p className="text-gray-500 font-lg">
+                  Tempo:{" "}
+                  <span className="text-black">{movie.runtime} Minutos</span>{" "}
+                </p>
+              </div>
+            </div>
+          </>
+        ) : (
+          <Loading />
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default Details;

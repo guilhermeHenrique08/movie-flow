@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Courier New", Courier, monospace;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply block bg-slate-900 rounded px-2 py-1 text-white text-center hover:bg-slate-700;
+  }
+}
