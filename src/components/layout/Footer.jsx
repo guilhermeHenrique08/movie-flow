@@ -8,7 +8,7 @@ function Footer() {
         <FaLinkedin className="text-xl"/>
         <FaInstagram className="text-xl"/>
       </div>
-      <p className="mt-3 text-gray-500 text-center">&copy; 2023 MovieFlow by Guilherme Henrique</p>
+      <p className="mt-3 text-gray-500 text-center">&copy; 2023 MovieFlow by Guilherme Marques</p>
     </footer>
   );
 }
