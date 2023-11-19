@@ -13,7 +13,6 @@ function Details() {
     const response = await fetch(url);
     const data = await response.json();
 
-    console.log(data);
     setMovie(data);
   }
 
@@ -34,6 +33,7 @@ function Details() {
                 alt={movie.title}
                 className="rounded w-full"
               />
+
               <a
                 href={movie.homepage}
                 target="_blank"
@@ -41,10 +41,19 @@ function Details() {
               >
                 Acessar pagina
               </a>
+
               <div className="flex gap-8 my-5">
-                <FaGithub className="text-xl" />
-                <FaLinkedin className="text-xl" />
-                <FaInstagram className="text-xl" />
+                <a href="https://github.com/guilhermeHenrique08">
+                  <FaGithub className="text-xl transition-all hover:scale-110" />
+                </a>
+
+                <a href="https://www.linkedin.com/in/dev-guilherme-marques/">
+                  <FaLinkedin className="text-xl transition-all hover:scale-110" />
+                </a>
+
+                <a href="#">
+                  <FaInstagram className="text-xl transition-all hover:scale-110" />
+                </a>
               </div>
             </div>
             <div className="w-full flex flex-col justify-center gap-5 border-white pb-5 lg:w-3/5 lg:border-b-2">
