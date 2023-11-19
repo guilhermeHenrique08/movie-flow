@@ -5,7 +5,7 @@ function Search({ changeMovies }) {
 
   return (
     <div className="flex flex-col">
-      <label htmlFor="search">Pesquisar filme</label>
+      <label htmlFor="search" className="dark:text-white">Pesquisar filme</label>
       <input
         type="search"
         id="search"

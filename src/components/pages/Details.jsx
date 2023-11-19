@@ -37,47 +37,47 @@ function Details() {
               <a
                 href={movie.homepage}
                 target="_blank"
-                className="btn my-3 w-full"
+                className="btn my-3 w-full dark:bg-white dark:text-black"
               >
                 Acessar pagina
               </a>
 
               <div className="flex gap-8 my-5">
                 <a href="https://github.com/guilhermeHenrique08">
-                  <FaGithub className="text-xl transition-all hover:scale-110" />
+                  <FaGithub className="text-xl transition-all hover:scale-110 dark:text-white" />
                 </a>
 
                 <a href="https://www.linkedin.com/in/dev-guilherme-marques/">
-                  <FaLinkedin className="text-xl transition-all hover:scale-110" />
+                  <FaLinkedin className="text-xl transition-all hover:scale-110 dark:text-white" />
                 </a>
 
                 <a href="#">
-                  <FaInstagram className="text-xl transition-all hover:scale-110" />
+                  <FaInstagram className="text-xl transition-all hover:scale-110 dark:text-white" />
                 </a>
               </div>
             </div>
-            <div className="w-full flex flex-col justify-center gap-5 border-white pb-5 lg:w-3/5 lg:border-b-2">
-              <h2 className="font-bold text-lg lg:text-3xl">{movie.title}</h2>
+            <div className="w-full flex flex-col justify-center gap-5 border-white pb-5 lg:w-3/5 lg:border-b-2 dark:border-zinc-900">
+              <h2 className="font-bold text-lg lg:text-3xl dark:text-white">{movie.title}</h2>
               <div className="my-5">
-                <h3 className="font-semibold lg:text-lg">Resumo</h3>
-                <p className="text-lg lg:text-base">{movie.overview}</p>
+                <h3 className="font-semibold lg:text-lg dark:text-white">Resumo</h3>
+                <p className="text-lg lg:text-base dark:text-white">{movie.overview}</p>
               </div>
               <div>
                 <p className="text-gray-500 font-lg">
-                  Nota: <span className="text-black">{movie.vote_average}</span>
+                  Nota: <span className="text-black dark:text-white">{movie.vote_average}</span>
                 </p>
                 <p className="text-gray-500 font-lg">
-                  Data: <span className="text-black">{movie.release_date}</span>
+                  Data: <span className="text-black dark:text-white">{movie.release_date}</span>
                 </p>
                 <p className="text-gray-500 font-lg">
                   Generos:{" "}
-                  <span className="text-black">
+                  <span className="text-black dark:text-white">
                     {movie.genres.map((gender) => gender.name).join(", ")}
                   </span>
                 </p>
                 <p className="text-gray-500 font-lg">
                   Tempo:{" "}
-                  <span className="text-black">{movie.runtime} Minutos</span>{" "}
+                  <span className="text-black dark:text-white">{movie.runtime} Minutos</span>{" "}
                 </p>
               </div>
             </div>

@@ -37,7 +37,7 @@ function Home() {
       {movies.length > 0 ? (
         <>
           <div className="flex justify-between flex-wrap mb-7">
-            <h2 className="my-7 font-bold text-3xl">Filmes mais assistidos</h2>
+            <h2 className="my-7 font-bold text-3xl dark:text-white">Filmes mais assistidos</h2>
 
             <Search
               movies={movies}
@@ -53,8 +53,8 @@ function Home() {
               ))}
             </div>
           ) : (
-            <div className="mb-80 text-lg">
-              <p>Não ha filme com esse nome</p>
+            <div className="mb-80 text-lg dark:text-white">
+              <p>Não ha resultados para a pesquisa</p>
             </div>
           )}
         </>

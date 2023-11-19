@@ -8,16 +8,16 @@ function CardMovies({ dataMovie }) {
   return (
     <div
       id={dataMovie.id}
-      className="flex flex-col justify-center text-left w-72 gap-3 bg-white p-5 mb-6 rounded lg:w-80 lg:gap-4"
+      className="flex flex-col justify-center text-left w-72 gap-3 bg-white p-5 mb-6 rounded lg:w-80 lg:gap-4 dark:bg-zinc-950"
     >
       <img src={img_url} alt={dataMovie.title} className="rounded" />
-      <h3 className="text-base font-semibold">{dataMovie.title}</h3>
+      <h3 className="text-base font-semibold dark:text-white">{dataMovie.title}</h3>
 
       <div className="flex justify-between">
-        <h4>{dataMovie.release_date}</h4>
+        <h4 className="dark:text-white">{dataMovie.release_date}</h4>
         <div className="flex items-center gap-1">
           <FaStar className="text-amber-300" />
-          <p>{dataMovie.vote_average}</p>
+          <p className="dark:text-white">{dataMovie.vote_average}</p>
         </div>
       </div>
 
