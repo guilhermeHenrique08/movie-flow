@@ -1,6 +1,6 @@
 import { FaRegSadTear } from "react-icons/fa";
 
-import LinkButton from "../LinkButton";
+import LinkButton from "../components/LinkButton";
 
 function Error() {
   return (

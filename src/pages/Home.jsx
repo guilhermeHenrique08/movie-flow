@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
-import Search from "../Search";
-import CardMovie from "../CardMovie";
-import Loading from "../layout/Loading";
+import Search from "../components/Search";
+import CardMovie from "../components/CardMovie";
+import Loading from "../components/layout/Loading";
 
 function Home() {
   const [movies, setMovies] = useState([]);

@@ -3,7 +3,7 @@ import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
-import Loading from "../layout/Loading";
+import Loading from "../components/layout/Loading"
 import Error from './Error'
 
 function Details() {
