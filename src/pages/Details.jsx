@@ -1,38 +1,25 @@
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 
-import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
-import Loading from "../components/layout/Loading"
-import Error from './Error'
+import useFetch from "../hooks/useFetch";
+
+import Loading from "../components/layout/Loading";
+import Error from "./Error";
 
 function Details() {
-  const [movie, setMovie] = useState({});
-  const [loading, setLoading] = useState(true);
-
   const { id } = useParams();
+  const url_key = `https://api.themoviedb.org/3/movie/${id}?api_key=0c9e0791b3d75d434122c718a5f88d13`;
 
-  async function ApiMovie(url) {
-    const response = await fetch(url);
-    const data = await response.json();
-
-    setLoading(false);
-    setMovie(data);
-  }
-
-  useEffect(() => {
-    const url_key = `https://api.themoviedb.org/3/movie/${id}?api_key=0c9e0791b3d75d434122c718a5f88d13`;
-
-    ApiMovie(url_key);
-  }, []);
+  const { data: movie, loading } = useFetch(url_key);
 
   return (
     <div className="lg:h-screen lg:flex lg:justify-center">
       <div className="mx-auto flex flex-col justify-center pt-28 p-10 max-w-3xl lg:max-w-7xl lg:flex-row lg:gap-6 lg:items-center lg:justify-center lg:h-screen">
         {loading && <Loading />}
 
-        {!loading &&(
-          movie.id ? (
+        {!loading &&
+          (movie.id ? (
             <>
               <div className="flex flex-col items-center w-full lg:w-2/5">
                 <img
@@ -40,7 +27,7 @@ function Details() {
                   alt={movie.title}
                   className="rounded w-full"
                 />
-  
+
                 <a
                   href={movie.homepage}
                   target="_blank"
@@ -48,16 +35,16 @@ function Details() {
                 >
                   Acessar pagina
                 </a>
-  
+
                 <div className="flex gap-8 my-5">
                   <a href="https://github.com/guilhermeHenrique08">
                     <FaGithub className="text-xl transition-all hover:scale-110 dark:text-white" />
                   </a>
-  
+
                   <a href="https://www.linkedin.com/in/dev-guilherme-marques/">
                     <FaLinkedin className="text-xl transition-all hover:scale-110 dark:text-white" />
                   </a>
-  
+
                   <a href="#">
                     <FaInstagram className="text-xl transition-all hover:scale-110 dark:text-white" />
                   </a>
@@ -103,10 +90,9 @@ function Details() {
                 </div>
               </div>
             </>
-          ):(
-            <Error/>
-          )
-        )}
+          ) : (
+            <Error />
+          ))}
       </div>
     </div>
   );

@@ -1,11 +1,21 @@
 import { useState } from "react";
 
-function Search({ changeMovies }) {
+function Search({ movies, setFilteredMovies }) {
   const [searchInput, setSearchInput] = useState("");
+
+  function changeMovies(searchInput) {
+    const newMovies = movies.results.filter((movie) =>
+      movie.title.toLowerCase().includes(searchInput.toLowerCase())
+    );
+
+    setFilteredMovies(newMovies);
+  }
 
   return (
     <div className="flex flex-col">
-      <label htmlFor="search" className="dark:text-white">Pesquisar filme</label>
+      <label htmlFor="search" className="dark:text-white">
+        Pesquisar filme
+      </label>
       <input
         type="search"
         id="search"

@@ -1,52 +1,40 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+
+import useFetch from "../hooks/useFetch";
 
 import Search from "../components/Search";
 import CardMovie from "../components/CardMovie";
 import Loading from "../components/layout/Loading";
 
 function Home() {
-  const [movies, setMovies] = useState([]);
+  const url_key =
+    "https://api.themoviedb.org/3/movie/top_rated?api_key=0c9e0791b3d75d434122c718a5f88d13";
+
+  const { data: movies, loading } = useFetch(url_key);
+
   const [filteredMovies, setFilteredMovies] = useState([]);
 
   useEffect(() => {
-    const url_key =
-      "https://api.themoviedb.org/3/movie/top_rated?api_key=0c9e0791b3d75d434122c718a5f88d13";
-
-    async function ApiMovies(url) {
-      const response = await fetch(url);
-      const data = await response.json();
-      const { results } = data;
-
-      setMovies(results);
-      setFilteredMovies(results);
+    if (movies && movies.results) {
+      setFilteredMovies(movies.results);
     }
-
-    ApiMovies(url_key);
-  }, []);
-
-  function changeMovies(searchInput) {
-    const newMovies = movies.filter((movie) =>
-      movie.title.toLowerCase().includes(searchInput.toLowerCase())
-    );
-
-    setFilteredMovies(newMovies);
-  }
+  },[movies]);
 
   return (
     <div className="p-10 pt-28">
-      {movies.length > 0 ? (
+      {loading && <Loading />}
+
+      {movies && movies.results && (
         <>
           <div className="flex justify-between flex-wrap mb-7">
-            <h2 className="my-7 font-bold text-3xl dark:text-white">Filmes mais assistidos</h2>
+            <h2 className="my-7 font-bold text-3xl dark:text-white">
+              Filmes mais assistidos
+            </h2>
 
-            <Search
-              movies={movies}
-              setFilteredMovies={setFilteredMovies}
-              changeMovies={changeMovies}
-            />
+            <Search movies={movies} setFilteredMovies={setFilteredMovies} />
           </div>
 
-          {filteredMovies.length > 0 ? (
+          {filteredMovies && filteredMovies.length > 0 ? (
             <div className="flex justify-between flex-wrap">
               {filteredMovies.map((movie) => (
                 <CardMovie dataMovie={movie} key={movie.id} />
@@ -58,10 +46,9 @@ function Home() {
             </div>
           )}
         </>
-      ) : (
-        <Loading />
       )}
     </div>
   );
 }
+
 export default Home;
