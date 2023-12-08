@@ -1,24 +1,29 @@
-import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
-
 import { useParams } from "react-router";
 
-import useFetch from "../hooks/useFetch";
+import { useQuery } from "react-query";
 
 import Loading from "../components/layout/Loading";
 import Error from "./Error";
+
+import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 
 function Details() {
   const { id } = useParams();
   const url_key = `https://api.themoviedb.org/3/movie/${id}?api_key=0c9e0791b3d75d434122c718a5f88d13`;
 
-  const { data: movie, loading } = useFetch(url_key);
+  const { data: movie, isFetching } = useQuery("movie", async () => {
+    const response = await fetch(url_key);
+    const data = response.json();
+
+    return data;
+  });
 
   return (
     <div className="lg:h-screen lg:flex lg:justify-center">
       <div className="mx-auto flex flex-col justify-center pt-28 p-10 max-w-3xl lg:max-w-7xl lg:flex-row lg:gap-6 lg:items-center lg:justify-center lg:h-screen">
-        {loading && <Loading />}
+        {isFetching && <Loading />}
 
-        {!loading &&
+        {!isFetching &&
           (movie.id ? (
             <>
               <div className="flex flex-col items-center w-full lg:w-2/5">

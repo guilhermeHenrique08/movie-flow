@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import useFetch from "../hooks/useFetch";
+import { useQuery } from "react-query";
 
 import Search from "../components/Search";
 import CardMovie from "../components/CardMovie";
@@ -10,7 +10,20 @@ function Home() {
   const url_key =
     "https://api.themoviedb.org/3/movie/top_rated?api_key=0c9e0791b3d75d434122c718a5f88d13";
 
-  const { data: movies, loading } = useFetch(url_key);
+  const { data: movies, isFetching } = useQuery(
+    "movies",
+    async () => {
+      const response = await fetch(url_key);
+      const data = await response.json();
+
+      return data;
+    },
+    {
+      staleTime: 10000 * 6,
+    }
+  );
+
+  console.log(movies);
 
   const [filteredMovies, setFilteredMovies] = useState([]);
 
@@ -18,11 +31,11 @@ function Home() {
     if (movies && movies.results) {
       setFilteredMovies(movies.results);
     }
-  },[movies]);
+  }, [movies]);
 
   return (
     <div className="p-10 pt-28">
-      {loading && <Loading />}
+      {isFetching && <Loading />}
 
       {movies && movies.results && (
         <>
